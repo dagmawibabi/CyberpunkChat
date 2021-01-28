@@ -134,15 +134,24 @@ class NewsCard extends StatelessWidget {
                       painter: DentContainer(366.0, 36.0, 10.0, 10.0,
                           Colors.black, PaintingStyle.stroke),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        newsHeadline != null ? newsHeadline.toUpperCase() : "",
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: TextStyle(
-                          fontFamily: DesignElements.tirtiaryFont,
-                        ),
+                    Container(
+                      height: 36.0,
+                      child: ListView(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              newsHeadline != null
+                                  ? newsHeadline.toUpperCase()
+                                  : "",
+                              //overflow: TextOverflow.ellipsis,
+                              //maxLines: 1,
+                              style: TextStyle(
+                                fontFamily: DesignElements.tirtiaryFont,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -159,19 +168,26 @@ class NewsCard extends StatelessWidget {
                       painter: DentContainer(366.0, 84.0, 10.0, 10.0,
                           Colors.black, PaintingStyle.stroke),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        newsDescription != null
-                            ? newsDescription.toUpperCase() + "\n\n\n"
-                            : "The description of this new article is currently unavailable. We will update as soon as it's available! Thank you!"
-                                .toUpperCase(),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 3,
-                        style: TextStyle(
-                          fontFamily: DesignElements.secondaryFont,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Container(
+                      height: 84.0,
+                      child: ListView(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              newsDescription != null
+                                  ? newsDescription.toUpperCase() + "\n\n\n"
+                                  : "The description of this new article is currently unavailable. We will update as soon as it's available! Thank you!"
+                                      .toUpperCase(),
+                              //overflow: TextOverflow.ellipsis,
+                              //maxLines: 3,
+                              style: TextStyle(
+                                fontFamily: DesignElements.secondaryFont,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

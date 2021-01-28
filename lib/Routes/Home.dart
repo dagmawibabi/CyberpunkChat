@@ -40,97 +40,103 @@ class _HomeState extends State<Home> {
     de.changeTheme();
     return WillPopScope(
       onWillPop: () async => false,
-      child: Scaffold(
-        backgroundColor: DesignElements.scaffoldBG,
-        body: pages[curPage],
-        bottomNavigationBar: BottomAppBar(
-          color: DesignElements.bottomNavBarBG,
-          /*shape: CircularNotchedRectangle(),*/
-          shape: DiamondFabNotchedShape(),
-          notchMargin: 4,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(width: 10.0),
-              IconButton(
+      child: RefreshIndicator(
+        onRefresh: () {
+          print("heyoooooooooooooooooooooooooooooo");
+          return;
+        },
+        child: Scaffold(
+          backgroundColor: DesignElements.scaffoldBG,
+          body: pages[curPage],
+          bottomNavigationBar: BottomAppBar(
+            color: DesignElements.bottomNavBarBG,
+            /*shape: CircularNotchedRectangle(),*/
+            shape: DiamondFabNotchedShape(),
+            notchMargin: 4,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(width: 10.0),
+                IconButton(
+                    icon: Icon(
+                      Icons
+                          .home_outlined, //grain_sharp, //filter_tilt_shift_outlined, //donut_large_sharp, //data_usage_rounded,
+                      //change_history_outlined, //bubble_chart_outlined, //ballot_outlined,
+                      color: DesignElements.bottomNavBarIcons,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        curPage = 0;
+                      });
+                    }),
+                IconButton(
+                    icon: Icon(
+                      Icons.search,
+                      color: DesignElements.bottomNavBarIcons,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        curPage = 1;
+                      });
+                    }),
+                IconButton(
                   icon: Icon(
-                    Icons
-                        .home_outlined, //grain_sharp, //filter_tilt_shift_outlined, //donut_large_sharp, //data_usage_rounded,
-                    //change_history_outlined, //bubble_chart_outlined, //ballot_outlined,
+                    Icons.multitrack_audio_outlined,
                     color: DesignElements.bottomNavBarIcons,
                   ),
                   onPressed: () {
                     setState(() {
-                      curPage = 0;
+                      curPage = 2;
                     });
-                  }),
-              IconButton(
+                  },
+                ),
+                IconButton(
                   icon: Icon(
-                    Icons.search,
+                    Icons.stacked_line_chart,
                     color: DesignElements.bottomNavBarIcons,
                   ),
                   onPressed: () {
                     setState(() {
-                      curPage = 1;
+                      curPage = 3;
                     });
-                  }),
-              IconButton(
-                icon: Icon(
-                  Icons.multitrack_audio_outlined,
-                  color: DesignElements.bottomNavBarIcons,
+                  },
                 ),
-                onPressed: () {
-                  setState(() {
-                    curPage = 2;
-                  });
-                },
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.stacked_line_chart,
-                  color: DesignElements.bottomNavBarIcons,
+                IconButton(
+                  icon: Icon(
+                    Icons.memory_rounded,
+                    color: DesignElements.bottomNavBarIcons,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      curPage = 4;
+                    });
+                  },
                 ),
-                onPressed: () {
-                  setState(() {
-                    curPage = 3;
-                  });
-                },
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.memory_rounded,
-                  color: DesignElements.bottomNavBarIcons,
-                ),
-                onPressed: () {
-                  setState(() {
-                    curPage = 4;
-                  });
-                },
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        floatingActionButton: DiamondNotchedFab(
-          backgroundColor: DesignElements.fabBG,
-          child: Transform(
-            alignment: Alignment.center,
-            transform: Matrix4.rotationY(pi),
+          floatingActionButton: DiamondNotchedFab(
+            backgroundColor: DesignElements.fabBG,
+            child: Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.rotationY(pi),
+              child: Icon(
+                Icons.message_outlined,
+                color: DesignElements.fabIcons,
+              ),
+            ),
+            onPressed: () {},
+          ),
+          /*FloatingActionButton(
+            backgroundColor: DesignElements.fabBG,
             child: Icon(
               Icons.message_outlined,
               color: DesignElements.fabIcons,
             ),
-          ),
-          onPressed: () {},
+            onPressed: () {},
+          ),*/
+          floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
         ),
-        /*FloatingActionButton(
-          backgroundColor: DesignElements.fabBG,
-          child: Icon(
-            Icons.message_outlined,
-            color: DesignElements.fabIcons,
-          ),
-          onPressed: () {},
-        ),*/
-        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       ),
     );
   }

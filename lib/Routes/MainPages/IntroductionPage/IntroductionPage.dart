@@ -66,17 +66,6 @@ class _IntroductionPageState extends State<IntroductionPage> {
           ),
         ),
         actions: [
-          FlatButton(
-            child: Text(
-              "R",
-              style: TextStyle(
-                color: Colors.pink,
-              ),
-            ),
-            onPressed: () {
-              setState(() {});
-            },
-          ),
           Padding(
             padding: const EdgeInsets.only(top: 20.0, right: 20.0),
             child: FlatButton(
@@ -121,7 +110,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                       Text(
                         "WELCOME TO CYBERPUNK CHAT",
                         style: TextStyle(
-                          color: DesignElements.grey,
+                          color: Colors.white,
                           fontSize: 14.0,
                           letterSpacing: 1.0,
                           fontFamily: DesignElements.tirtiaryFont,
@@ -131,7 +120,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                       Text(
                         "The most futuristic social media platform out there!",
                         style: TextStyle(
-                          color: DesignElements.grey,
+                          color: Colors.white,
                           fontFamily: DesignElements.secondaryFont,
                         ),
                       ),
@@ -189,7 +178,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                       Text(
                         "WELCOME TO CYBERPUNK CHAT",
                         style: TextStyle(
-                          color: DesignElements.grey,
+                          color: Colors.white,
                           fontSize: 14.0,
                           letterSpacing: 1.0,
                           fontFamily: DesignElements.tirtiaryFont,
@@ -199,7 +188,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                       Text(
                         "The most futuristic social media platform out there!",
                         style: TextStyle(
-                          color: DesignElements.grey,
+                          color: Colors.white,
                           fontFamily: DesignElements.secondaryFont,
                         ),
                       ),
@@ -253,12 +242,6 @@ class _IntroductionPageState extends State<IntroductionPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Spacer(),
-                        //IMAGE
-                        /*CircleAvatar(
-                    backgroundImage:
-                        AssetImage("assets/images/introscreen/14.png"),
-                    radius: 120.0,
-                  ),*/
                         Image.asset("assets/images/introscreen/14.png"),
                         SizedBox(height: 40.0),
                         // TITLE AND BODY
@@ -280,7 +263,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                                     Text(
                                       "LET'S EXPLORE THE WORLD!",
                                       style: TextStyle(
-                                        color: DesignElements.grey,
+                                        color: Colors.white,
                                         fontSize: 14.0,
                                         letterSpacing: 1.0,
                                         fontFamily: DesignElements.tirtiaryFont,

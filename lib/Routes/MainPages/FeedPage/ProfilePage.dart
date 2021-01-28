@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:socialmedia/Routes/UIElements/DentContainer.dart';
 import 'package:socialmedia/Routes/UIElements/DesignElements.dart';
 
 void main() {
@@ -58,17 +59,17 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Stack(
                     children: [
                       CustomPaint(
-                        size: Size(dpWidth, dpHeight),
-                        painter: ProfilePicPainter(dpWidth, dpHeight),
+                        painter: DentContainer(dpWidth, dpHeight, 10.0, 10.0,
+                            Colors.black, PaintingStyle.fill),
                       ),
-                      // DP
-                      ClipPath(
-                        clipper: ProfilePicClipper(dpWidth, dpHeight),
-                        child: Image.asset(
-                          _image == null
-                              ? "assets/images/2.jpg"
-                              : _image.toString(),
-                        ),
+                      Container(
+                        width: dpWidth,
+                        height: dpHeight,
+                        child: Image.asset("assets/images/2.jpg"),
+                      ),
+                      CustomPaint(
+                        painter: DentContainer(dpWidth, dpHeight, 10.0, 20.0,
+                            Colors.black, PaintingStyle.stroke),
                       ),
                       // CHANGE DP BUTTON
                       Positioned(
@@ -93,6 +94,50 @@ class _ProfilePageState extends State<ProfilePage> {
                     ],
                   ),
                 ),
+              ),
+            ),
+          ),
+          //Spacer(),
+          Container(
+            height: 200.0,
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Stack(
+                children: [
+                  CustomPaint(
+                    painter: DentContainer(
+                      94.0,
+                      44.0,
+                      10.0,
+                      10.0,
+                      Colors.black,
+                      PaintingStyle.fill,
+                    ),
+                  ),
+                  Container(
+                    child: FlatButton(
+                      onPressed: () {},
+                      child: Text(
+                        "LOGOUT",
+                        style: TextStyle(
+                          color: Colors.pinkAccent,
+                          fontFamily: DesignElements.tirtiaryFont,
+                        ),
+                      ),
+                    ),
+                  ),
+                  CustomPaint(
+                    painter: DentContainer(
+                      94.0,
+                      44.0,
+                      10.0,
+                      10.0,
+                      Colors.black,
+                      PaintingStyle.stroke,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

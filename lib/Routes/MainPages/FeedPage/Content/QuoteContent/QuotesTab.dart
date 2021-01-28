@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:socialmedia/Routes/MainPages/FeedPage/Content/QuoteContent/QuotesCard.dart';
+import 'package:socialmedia/Routes/UIElements/QuoteContentDisplayer.dart';
 
 class QuotesTab extends StatelessWidget {
   const QuotesTab({
@@ -20,28 +20,28 @@ class QuotesTab extends StatelessWidget {
         itemBuilder: (context, index) {
           Widget qc;
           if (quotesList[index][0] == "QUOTABLE") {
-            qc = QuotesCard(
+            qc = QuoteContent(
               quoteSource: "QUOTABLE",
               quoteTag: quotesList[index][1]["tags"][0],
               quoteContent: quotesList[index][1]["content"],
               quoteAuthor: quotesList[index][1]["author"],
             );
           } else if (quotesList[index][0] == "TYPE.FIT") {
-            qc = QuotesCard(
+            qc = QuoteContent(
               quoteSource: "TYPE.FIT",
               quoteTag: "QUOTES",
               quoteContent: quotesList[index][1]["text"],
               quoteAuthor: quotesList[index][1]["author"],
             );
           } else if (quotesList[index][0] == "ADVICE SLIP") {
-            qc = QuotesCard(
+            qc = QuoteContent(
               quoteSource: "ADVICE SLIP",
               quoteTag: "ADVICE",
               quoteContent: quotesList[index][1]["advice"],
               quoteAuthor: "ADVICE SLIP.COM",
             );
           } else if (quotesList[index][0] == "AFFIRMATIONS") {
-            qc = QuotesCard(
+            qc = QuoteContent(
               quoteSource: "AFFIRMATIONS",
               quoteTag: "AFFIRMATION",
               quoteContent: quotesList[index][1]["affirmation"],

@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:socialmedia/Routes/MainPages/CryptoPage/CryptoIconViewer.dart';
-import 'package:socialmedia/Routes/MainPages/CryptoPage/CryptoPage.dart';
-import 'package:socialmedia/Routes/MainPages/FeedPage/Content/HumorContent/memeViewer.dart';
-import 'package:socialmedia/Routes/UIElements/DesignElements.dart';
 import 'package:socialmedia/Routes/Home.dart';
-import 'package:socialmedia/Routes/MainPages/IntroductionPage/IntroductionPage.dart';
-import 'package:socialmedia/Routes/MainPages/IntroductionPage/IntroductionPageX.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:socialmedia/Routes/UIElements/DesignElements.dart';
+import 'package:socialmedia/Routes/UIElements/GraphicsViewer.dart';
 import 'package:socialmedia/Routes/MainPages/LoadingPage/LoadingPage.dart';
 import 'package:socialmedia/Routes/MainPages/IntroductionPage/LoginPage.dart';
+import 'package:socialmedia/Routes/MainPages/IntroductionPage/SignUpPage.dart';
+import 'package:socialmedia/Routes/MainPages/IntroductionPage/IntroductionPage.dart';
+import 'package:socialmedia/Routes/MainPages/FeedPage/feedPage.dart';
 import 'package:socialmedia/Routes/MainPages/FeedPage/ProfilePage.dart';
 import 'package:socialmedia/Routes/MainPages/SearchPage/SearchPage.dart';
 import 'package:socialmedia/Routes/MainPages/MusicPage/MusicPage.dart';
+import 'package:socialmedia/Routes/MainPages/CryptoPage/CryptoPage.dart';
+import 'package:socialmedia/Routes/MainPages/CryptoPage/CryptoIconViewer.dart';
 import 'package:socialmedia/Routes/MainPages/SettingsPage/SettingsPage.dart';
-import 'package:socialmedia/Routes/MainPages/IntroductionPage/SignUpPage.dart';
-import 'package:socialmedia/Routes/MainPages/FeedPage/feedPage.dart';
 
 void main() {
   runApp(Main());
@@ -55,7 +54,7 @@ class _MainState extends State<Main> {
         "loginPage": (context) => LoginPage(),
         "homePage": (context) => Home(),
         "feedPage": (context) => FeedPage(),
-        "memeViewer": (context) => MemeViewer(),
+        "graphicsViewer": (context) => GraphicsViewer(),
         "profilePage": (context) => ProfilePage(),
         "searchPage": (context) => SearchPage(),
         "musicPage": (context) => MusicPage(),

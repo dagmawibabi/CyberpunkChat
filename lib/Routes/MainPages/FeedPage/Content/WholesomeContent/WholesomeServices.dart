@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'dart:math';
 
-class HumorServices {
-  List humorList = [];
-  Future<void> getHumer() async {
+class WholesomeServices {
+  List wholesomeList = [];
+  Future<void> getWholesome() async {
     // GET MEMES FROM SUBREDDITS
     /* 
       YOU CAN USE THESE KEYWORD TO FILTER THE POSTS
@@ -12,46 +12,22 @@ class HumorServices {
       FORMAT = https://www.reddit.com/r/SUBREDDIT/KEYWORD.json
     */
     List subRedditsList = [
-      "jokes",
-      "dadJokes",
-      "dirtyJokes",
-      "cleanJokes",
-      "Demotivational",
-      "funnySigns",
-      "me_irl",
-      "wellThatSucks",
-      "youDontSurf",
-      "ATBGE",
-      "ShittyLifeProTips",
-      "misleadingThumbnails",
-      "shittyAskScience",
-      "technicallyTheTruth",
-      "bertsTrips",
-      "4Chan",
-      "DiWHY",
-      "thereWasAnAttempt",
-      "starterPacks",
-      "facePalm",
-      "photoshopBattles",
-      "blunderyears",
-      "trippinthroughtime",
-      "dankmemes",
-      "memes",
-      "funny",
-      "teenagers",
-      "adviceAnimals",
-      "memeEconomy",
-      "comedyCemetery",
-      "historyMemes",
-      "bikiniBottomTwitter",
-      "comedyNecromancy",
-      "dontDeadOpenInside",
-      "gameOfThronesMemes",
-      "hmmm",
-      "holUp",
+      "awww",
+      "Awwducational",
+      "wholesomeMemes",
+      "thisMadeMeSmile",
+      "eyeBleach",
+      "humansBeingBros",
+      "ActualHippies",
+      "Rabbits",
+      "CatSmiles",
+      "wholesomegreentext",
+      "MadeMeSmile",
+      "guineapigs",
+      "AnimalsBeingBros",
     ];
 
-    // Grab N-amount of trending memes from the subreddits
+    // Grab N-amount of trending content from the subreddits
     for (var i = 0; i < subRedditsList.length; i++) {
       Response responseSubReddit =
           await get("https://www.reddit.com/r/" + subRedditsList[i] + ".json");
@@ -60,13 +36,13 @@ class HumorServices {
       for (var j = 0;
           j < 2 /*responseSubRedditJSON["data"]["children"].length*/;
           j++) {
-        // GRAPHICAL JOKES
+        // GRAPHICAL CONTENT
         if (responseSubRedditJSON["data"]["children"][j]["data"]
                     ["thumbnail_width"] !=
                 null &&
             responseSubRedditJSON["data"]["children"][j]["data"]["is_video"] ==
                 false) {
-          humorList.add(
+          wholesomeList.add(
             [
               subRedditsList[i],
               responseSubRedditJSON["data"]["children"][j]["data"],
@@ -74,9 +50,9 @@ class HumorServices {
             ],
           );
         }
-        // TEXT ONLY JOKES
+        // TEXT ONLY CONTENT
         else {
-          humorList.add(
+          wholesomeList.add(
             [
               subRedditsList[i],
               responseSubRedditJSON["data"]["children"][j]["data"],
@@ -87,11 +63,10 @@ class HumorServices {
       }
     }
 
-    // Det Dad Jokes
     // SHUFFLE DATA
     print("--------------------------");
-    print(humorList.length);
+    print(wholesomeList.length);
     print("--------------------------");
-    humorList.shuffle();
+    wholesomeList.shuffle();
   }
 }
