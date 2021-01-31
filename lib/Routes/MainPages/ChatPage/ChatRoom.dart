@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:socialmedia/Routes/UIElements/DentContainer.dart';
 import 'package:socialmedia/Routes/UIElements/DesignElements.dart';
 
 void main() {
@@ -11,33 +14,23 @@ class ChatRoom extends StatefulWidget {
 }
 
 class _ChatRoomState extends State<ChatRoom> {
+  String messageText;
+  final _firestore = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
+
+  void messagesStream() async {
+    await for (var snapshots in _firestore.collection("messages").snapshots()) {
+      for (var messages in snapshots.docs) {
+        print(messages.data());
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Map receivedData = ModalRoute.of(context).settings.arguments;
+    TextEditingController messageController = TextEditingController();
     return Scaffold(
-      /*appBar: AppBar(
-        backgroundColor: Colors.grey[900],
-        elevation: 0.0,
-        shadowColor: Colors.grey[900],
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.grey[500],
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.person_outline_outlined,
-              color: Colors.grey[500],
-            ),
-            onPressed: () {},
-          ),
-        ],
-      ),*/
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(top: 10.0),
@@ -59,7 +52,7 @@ class _ChatRoomState extends State<ChatRoom> {
           child: Column(
             children: [
               SizedBox(height: 50.0),
-              // OPTIONS
+              // OPTIONS - BACK AND PROFILE VIEWER
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -77,7 +70,9 @@ class _ChatRoomState extends State<ChatRoom> {
                       Icons.person_outline,
                       color: Colors.black,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      messagesStream();
+                    },
                   ),
                 ],
               ),
@@ -90,6 +85,7 @@ class _ChatRoomState extends State<ChatRoom> {
                 ),
               ),
               SizedBox(height: 10.0),
+              // USERNAME
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -136,6 +132,35 @@ class _ChatRoomState extends State<ChatRoom> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      StreamBuilder<QuerySnapshot>(
+                          stream: _firestore.collection("messages").snapshots(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              final messages = snapshot.data.docs;
+                              List<Widget> messageWidgets = [];
+                              for (var message in messages) {
+                                final messageText = message["text"];
+                                final messageSender = message["sender"];
+                                final messageWidget = MessageContainer(
+                                  messageSender: messageSender,
+                                  messageText: messageText,
+                                );
+                                messageWidgets.add(messageWidget);
+                              }
+                              return Expanded(
+                                child: ListView(children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: messageWidgets,
+                                  ),
+                                ]),
+                              );
+                            } else {
+                              return CircularProgressIndicator(
+                                backgroundColor: Colors.blue,
+                              );
+                            }
+                          }),
                       Container(
                         padding: const EdgeInsets.only(
                           right: 6.0,
@@ -154,6 +179,7 @@ class _ChatRoomState extends State<ChatRoom> {
                         ),
                         child: Row(
                           children: [
+                            // ATTACH BTN
                             IconButton(
                               icon: Icon(
                                 Icons.attach_file_outlined,
@@ -161,8 +187,13 @@ class _ChatRoomState extends State<ChatRoom> {
                               ),
                               onPressed: () {},
                             ),
+                            // MESSAGE INPUT
                             Expanded(
                               child: TextField(
+                                controller: messageController,
+                                onChanged: (value) {
+                                  messageText = value;
+                                },
                                 decoration: InputDecoration(
                                   labelText: "MESSAGE",
                                   labelStyle: TextStyle(
@@ -183,12 +214,19 @@ class _ChatRoomState extends State<ChatRoom> {
                                 ),
                               ),
                             ),
+                            // SEND BTN
                             IconButton(
                               icon: Icon(
                                 Icons.send,
                                 color: Colors.black,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                messageController.clear();
+                                _firestore.collection("messages").add({
+                                  "text": messageText,
+                                  "sender": _auth.currentUser.email,
+                                });
+                              },
                             ),
                           ],
                         ),
@@ -200,6 +238,46 @@ class _ChatRoomState extends State<ChatRoom> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class MessageContainer extends StatefulWidget {
+  @override
+  _MessageContainerState createState() => _MessageContainerState();
+  MessageContainer({this.messageSender, this.messageText});
+  final String messageSender;
+  final String messageText;
+}
+
+class _MessageContainerState extends State<MessageContainer> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      padding: EdgeInsets.all(14.0),
+      margin: EdgeInsets.all(4.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(
+            widget.messageSender,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+            textAlign: TextAlign.right,
+          ),
+          Text(
+            widget.messageText,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
     );
   }

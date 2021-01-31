@@ -3,6 +3,7 @@ import 'package:diamond_notched_fab/diamond_notched_fab.dart';
 import 'package:flutter/material.dart';
 import 'package:socialmedia/Routes/MainPages/ChatPage/ChatPage.dart';
 import 'package:socialmedia/Routes/MainPages/CryptoPage/CryptoPage.dart';
+import 'package:socialmedia/Routes/UIElements/DentContainer.dart';
 import 'package:socialmedia/Routes/UIElements/DesignElements.dart';
 import 'package:socialmedia/Routes/MainPages/SearchPage/SearchPage.dart';
 import 'package:socialmedia/Routes/MainPages/SettingsPage/SettingsPage.dart';
@@ -88,6 +89,56 @@ class _HomeState extends State<Home> {
       onWillPop: () async => false,
       child: Scaffold(
         backgroundColor: DesignElements.scaffoldBG,
+        appBar: isContentLoading && curPage == 0
+            ? AppBar(
+                shadowColor: Colors.white,
+                backgroundColor: DesignElements.appBarBG,
+                automaticallyImplyLeading: false,
+                title: Text(
+                  "Cyberpunk",
+                  style: TextStyle(
+                    color: DesignElements.appBarTitle,
+                    fontSize: DesignElements.appBarTitleFontSize,
+                    fontFamily: DesignElements.mainFont,
+                    letterSpacing: DesignElements.appBarTitleLetterSpacing,
+                  ),
+                ),
+                actions: [
+                  Container(
+                    margin: EdgeInsets.only(top: 16.0, right: 8.0),
+                    child: Container(
+                      width: 46.0,
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          CustomPaint(
+                            painter: DentContainer(46.0, 36.0, 10.0, 8.0,
+                                Colors.grey[400], PaintingStyle.fill),
+                          ),
+                          CustomPaint(
+                            painter: DentContainer(46.0, 36.0, 10.0, 8.0,
+                                Colors.black, PaintingStyle.stroke),
+                          ),
+                          Positioned(
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.person_outline, //account_circle_outlined,
+                                size: 24.0,
+                                color:
+                                    Colors.black, //DesignElements.appBarIcons,
+                              ),
+                              onPressed: () {
+                                Navigator.pushNamed(context, "profilePage");
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            : null,
         body: curPage == 0
             ? isContentLoading == false
                 ? FeedPage(

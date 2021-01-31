@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -32,6 +34,19 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
+  User currentUser;
+  void getUser() {
+    final _auth = FirebaseAuth.instance;
+    print(_auth.currentUser);
+    currentUser = _auth.currentUser;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: ListView(
         children: [
+          // PROFILE PIC
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: Center(
@@ -97,7 +113,10 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
           ),
-          //Spacer(),
+          SizedBox(height: 50.0),
+          // USER NAME
+          Text(currentUser.email),
+          // LOG OUT BUTTON
           Container(
             height: 200.0,
             alignment: Alignment.bottomCenter,
@@ -117,7 +136,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Container(
                     child: FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(context, "/");
+                      },
                       child: Text(
                         "LOGOUT",
                         style: TextStyle(
