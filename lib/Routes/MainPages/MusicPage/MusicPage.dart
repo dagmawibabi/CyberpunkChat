@@ -18,6 +18,12 @@ class _MusicPageState extends State<MusicPage> {
     "assets/images/2.jpg",
     "assets/images/11.png",
   ];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

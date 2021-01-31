@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:socialmedia/Routes/Home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:socialmedia/Routes/MainPages/ChatPage/ChatPage.dart';
+import 'package:socialmedia/Routes/MainPages/ChatPage/ChatRoom.dart';
 import 'package:socialmedia/Routes/UIElements/DesignElements.dart';
 import 'package:socialmedia/Routes/UIElements/GraphicsViewer.dart';
 import 'package:socialmedia/Routes/MainPages/LoadingPage/LoadingPage.dart';
@@ -46,13 +48,14 @@ class _MainState extends State<Main> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: "homePage",
+      initialRoute: "/",
       routes: {
         "/": (context) => LoadingPage(),
         "introductionPage": (context) => IntroductionPage(),
         "signUpPage": (context) => SignUpPage(),
         "loginPage": (context) => LoginPage(),
         "homePage": (context) => Home(),
+        "chatRoom": (context) => ChatRoom(),
         "feedPage": (context) => FeedPage(),
         "graphicsViewer": (context) => GraphicsViewer(),
         "profilePage": (context) => ProfilePage(),

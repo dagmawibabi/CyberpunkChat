@@ -64,9 +64,6 @@ class WholesomeServices {
     }
 
     // SHUFFLE DATA
-    print("--------------------------");
-    print(wholesomeList.length);
-    print("--------------------------");
     wholesomeList.shuffle();
   }
 }

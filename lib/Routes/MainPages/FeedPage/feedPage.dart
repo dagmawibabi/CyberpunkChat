@@ -19,6 +19,19 @@ void main() {
 class FeedPage extends StatefulWidget {
   @override
   _FeedPageState createState() => _FeedPageState();
+  final List newsArticlesListFP;
+  final bool isNewsTabLoadingFP;
+  final List quotesListFP;
+  final bool isQuotesTabLoadingFP;
+  final Function getQuotesRefreshFP;
+  const FeedPage({
+    Key key,
+    this.newsArticlesListFP,
+    this.isNewsTabLoadingFP,
+    this.quotesListFP,
+    this.isQuotesTabLoadingFP,
+    this.getQuotesRefreshFP,
+  }) : super(key: key);
 }
 
 class _FeedPageState extends State<FeedPage> with TickerProviderStateMixin {
@@ -31,13 +44,18 @@ class _FeedPageState extends State<FeedPage> with TickerProviderStateMixin {
   List humorList = [];
   List wholesomeList = [];
   // NEWS
-  void getNews() async {
+  void getNews() {
+    newsArticlesList = widget.newsArticlesListFP;
+    isNewsTabLoading = widget.isNewsTabLoadingFP;
+    setState(() {});
+  }
+  /*void getNews() async {
     NewsServices ns = NewsServices();
     await ns.getHeadLines();
     newsArticlesList = ns.articlesList;
     isNewsTabLoading = false;
     setState(() {});
-  }
+  }*/
 
   Future<void> getNewsRefresh() async {
     isNewsTabLoading = true;
@@ -47,7 +65,13 @@ class _FeedPageState extends State<FeedPage> with TickerProviderStateMixin {
   }
 
   // QUOTES
-  void getQuotes() async {
+  void getQuotes() {
+    quotesList = widget.quotesListFP;
+    isQuotesTabLoading = widget.isQuotesTabLoadingFP;
+    setState(() {});
+  }
+
+  /*void getQuotes() async {
     QuoteServices qs = QuoteServices();
     await qs.getQuotables();
     quotesList = qs.quotesList;
@@ -60,7 +84,7 @@ class _FeedPageState extends State<FeedPage> with TickerProviderStateMixin {
     quotesList = [];
     setState(() {});
     getQuotes();
-  }
+  }*/
 
   // HUMOR
   void getHumor() async {
@@ -80,17 +104,11 @@ class _FeedPageState extends State<FeedPage> with TickerProviderStateMixin {
 
   // Wholesome
   void getWholesome() async {
-    print("----------------");
-    print("getting wholesome");
-    print("----------------");
     WholesomeServices hs = WholesomeServices();
     await hs.getWholesome();
     wholesomeList = hs.wholesomeList;
     isWholesomeTabLoading = false;
     setState(() {});
-    print("----------------");
-    print("GOT WHOLESOME");
-    print("----------------");
   }
 
   Future<void> getWholesomeRefresh() async {
@@ -242,7 +260,9 @@ class _FeedPageState extends State<FeedPage> with TickerProviderStateMixin {
           // QUOTES TAB
           isQuotesTabLoading == false
               ? QuotesTab(
-                  quotesList: quotesList, getQuotesRefresh: getQuotesRefresh)
+                  quotesList: quotesList,
+                  getQuotesRefresh: widget.getQuotesRefreshFP,
+                )
               : Container(
                   child: Center(
                     child: CircularProgressIndicator(
