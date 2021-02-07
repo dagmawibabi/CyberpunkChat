@@ -16,20 +16,14 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     List friendsList = [
-      "Bill Gates",
-      "Elon Musk",
-      "Hilina Belay",
-      "Dagmawi Babi",
-      "Yohannes Tesfu",
-      "Seada Mohammad",
-      "vakbdddddddddddddddddddddddddddddddddd",
+      "Group Chat",
     ];
     return Scaffold(
       backgroundColor: DesignElements.scaffoldBG,
       appBar: AppBar(
         shadowColor: Colors.white,
         backgroundColor: DesignElements.appBarBG,
-        //automaticallyImplyLeading: false,
+        automaticallyImplyLeading: false,
         title: Text(
           "CYBERCHAT",
           style: TextStyle(
@@ -76,24 +70,38 @@ class _ChatPageState extends State<ChatPage> {
                         top: 2.0, bottom: 2.0, left: 12.0, right: 4.0),
                     child: Row(
                       children: [
-                        CircleAvatar(
-                          backgroundImage: AssetImage("assets/images/2.jpg"),
-                          radius: 20.0,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              "chatRoom",
+                              arguments: {
+                                "heroTag": "profilepic$index",
+                                "name": friendsList[index],
+                                "image": "assets/images/GroupChatDP.png",
+                              },
+                            );
+                          },
+                          child: Hero(
+                            tag: "profilepic$index",
+                            child: CircleAvatar(
+                              backgroundImage:
+                                  AssetImage("assets/images/GroupChatDP.png"),
+                              radius: 20.0,
+                            ),
+                          ),
                         ),
                         SizedBox(width: 10.0),
                         Expanded(
                           flex: 10,
-                          child: Hero(
-                            tag: "profilepic$index",
-                            child: Text(
-                              friendsList[index].toString().toUpperCase(),
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                fontFamily: DesignElements.tirtiaryFont,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                          child: Text(
+                            friendsList[index].toString().toUpperCase(),
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontFamily: DesignElements.tirtiaryFont,
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         Spacer(),
@@ -104,8 +112,9 @@ class _ChatPageState extends State<ChatPage> {
                               context,
                               "chatRoom",
                               arguments: {
+                                "heroTag": "profilepic$index",
                                 "name": friendsList[index],
-                                "image": "assets/images/2.jpg",
+                                "image": "assets/images/GroupChatDP.png",
                               },
                             );
                           },

@@ -36,6 +36,7 @@ class _GraphicsViewerState extends State<GraphicsViewer> {
   @override
   Widget build(BuildContext context) {
     Map receivedData = ModalRoute.of(context).settings.arguments;
+    String assetOrNetwork = receivedData["assetOrNetwork"];
     return Scaffold(
       backgroundColor: Colors.grey[850],
       appBar: AppBar(
@@ -66,38 +67,42 @@ class _GraphicsViewerState extends State<GraphicsViewer> {
                 backgroundColor: Colors.white,
               );
             },
-            imageProvider: NetworkImage(receivedData["graphics"]),
+            imageProvider: assetOrNetwork == "network"
+                ? NetworkImage(receivedData["graphics"])
+                : AssetImage(receivedData["graphics"]),
             enableRotation: enableRotation,
           ),
         ),
       ),
-      floatingActionButton: DiamondNotchedFab(
-        backgroundColor: DesignElements.fabBG,
-        child: Icon(
-          downloadStatus,
-          color: DesignElements.fabIcons,
-        ),
-        onPressed: () async {
-          try {
-            // Saved with this method.
-            var imageId =
-                await ImageDownloader.downloadImage(receivedData["graphics"]);
-            if (imageId == null) {
-              return;
-            }
+      floatingActionButton: assetOrNetwork == "network"
+          ? DiamondNotchedFab(
+              backgroundColor: DesignElements.fabBG,
+              child: Icon(
+                downloadStatus,
+                color: DesignElements.fabIcons,
+              ),
+              onPressed: () async {
+                try {
+                  // Saved with this method.
+                  var imageId = await ImageDownloader.downloadImage(
+                      receivedData["graphics"]);
+                  if (imageId == null) {
+                    return;
+                  }
 
-            // Below is a method of obtaining saved image information.
-            var fileName = await ImageDownloader.findName(imageId);
-            var size = await ImageDownloader.findByteSize(imageId);
-            var mimeType = await ImageDownloader.findMimeType(imageId);
-            var path = await ImageDownloader.findPath(imageId);
+                  // Below is a method of obtaining saved image information.
+                  var fileName = await ImageDownloader.findName(imageId);
+                  var size = await ImageDownloader.findByteSize(imageId);
+                  var mimeType = await ImageDownloader.findMimeType(imageId);
+                  var path = await ImageDownloader.findPath(imageId);
 
-            await ImageDownloader.open(path);
-          } on PlatformException catch (error) {
-            print(error);
-          }
-        },
-      ),
+                  await ImageDownloader.open(path);
+                } on PlatformException catch (error) {
+                  print(error);
+                }
+              },
+            )
+          : Container(),
     );
   }
 }

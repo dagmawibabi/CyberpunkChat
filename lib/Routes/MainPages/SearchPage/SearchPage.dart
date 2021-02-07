@@ -28,7 +28,7 @@ class _SearchPageState extends State<SearchPage> {
             children: [
               CustomPaint(
                 painter: DentContainer(screenWidth - 36, 44.0, 16.0, 8.0,
-                    Colors.red, PaintingStyle.fill),
+                    Colors.white, PaintingStyle.fill),
               ),
               Container(
                 padding: EdgeInsets.only(left: 4.0, right: 4.0),

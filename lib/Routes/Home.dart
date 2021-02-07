@@ -3,6 +3,7 @@ import 'package:diamond_notched_fab/diamond_notched_fab.dart';
 import 'package:flutter/material.dart';
 import 'package:socialmedia/Routes/MainPages/ChatPage/ChatPage.dart';
 import 'package:socialmedia/Routes/MainPages/CryptoPage/CryptoPage.dart';
+import 'package:socialmedia/Routes/MainPages/CryptoPage/CryptoServices.dart';
 import 'package:socialmedia/Routes/UIElements/DentContainer.dart';
 import 'package:socialmedia/Routes/UIElements/DesignElements.dart';
 import 'package:socialmedia/Routes/MainPages/SearchPage/SearchPage.dart';
@@ -25,6 +26,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   // TRIAL START
   bool isContentLoading = true;
+
   List newsArticlesList = [];
   bool isNewsTabLoading = true;
   void getNews() async {
@@ -44,12 +46,9 @@ class _HomeState extends State<Home> {
     isQuotesTabLoading = false;
     isContentLoading = false;
     setState(() {});
-    print("been here");
   }
 
   Future<void> getQuotesRefresh() async {
-    print("----------------------");
-    print(isQuotesTabLoading);
     isQuotesTabLoading = true;
     quotesList = [];
     QuoteServices qs = QuoteServices();
@@ -58,9 +57,20 @@ class _HomeState extends State<Home> {
     isQuotesTabLoading = false;
     isContentLoading = false;
     setState(() {});
-    print(isQuotesTabLoading);
-    print("----------------------");
   }
+
+  /* GET CRYPTO
+    List cryptosPriceData = []; 
+  void getCryptoPrices() async {
+    cryptosPriceData = [];
+    CryptoServices cs = CryptoServices();
+    await cs.getPrices();
+    for (var i = 0; i < 100; i++) {
+      cryptosPriceData.add(cs.allCryptoPriceDataList[i]);
+    }
+    isContentLoading = false;
+    setState(() {});
+  }*/
 
   // TRIAL END
 
@@ -149,7 +159,11 @@ class _HomeState extends State<Home> {
                     getQuotesRefreshFP: getQuotesRefresh,
                   )
                 : Container(
-                    child: Center(child: Text('LOADING')),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
                   )
             : pages[curPage],
         bottomNavigationBar: BottomAppBar(

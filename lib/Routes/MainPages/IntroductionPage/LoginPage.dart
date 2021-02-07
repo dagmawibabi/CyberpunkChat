@@ -35,6 +35,8 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setBool("isLoggedIn", true);
+      prefs.setString("email", emailController.text);
+      prefs.setString("password", passwordController.text);
       isLoading = false;
       setState(() {});
       Navigator.pushReplacementNamed(context, "homePage");

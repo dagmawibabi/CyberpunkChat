@@ -61,6 +61,14 @@ class _ProfilePageState extends State<ProfilePage> {
             letterSpacing: DesignElements.appBarTitleLetterSpacing,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, "/");
+            },
+          ),
+        ],
       ),
       body: ListView(
         children: [
@@ -81,7 +89,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Container(
                         width: dpWidth,
                         height: dpHeight,
-                        child: Image.asset("assets/images/2.jpg"),
+                        child: Image.asset("assets/images/4.jpg"),
                       ),
                       CustomPaint(
                         painter: DentContainer(dpWidth, dpHeight, 10.0, 20.0,
@@ -115,7 +123,18 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           SizedBox(height: 50.0),
           // USER NAME
-          Text(currentUser.email),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                currentUser.email.toString().toUpperCase(),
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontFamily: DesignElements.tirtiaryFont,
+                ),
+              ),
+            ],
+          ),
           // LOG OUT BUTTON
           Container(
             height: 200.0,

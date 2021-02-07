@@ -169,6 +169,7 @@ class GraphicalContent extends StatelessWidget {
                       "graphicsViewer",
                       arguments: {
                         "graphics": graphics,
+                        "assetOrNetwork": "netwrok",
                       },
                     );
                   },
