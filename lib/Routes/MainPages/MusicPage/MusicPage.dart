@@ -79,7 +79,7 @@ class _MusicPageState extends State<MusicPage> {
                                       20,
                                       20,
                                       10,
-                                      Colors.grey[400],
+                                      Colors.grey[400]!,
                                       PaintingStyle.fill),
                                 ),
                               ],

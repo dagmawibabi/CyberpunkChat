@@ -18,10 +18,10 @@ class IntroductionPage extends StatefulWidget {
 class _IntroductionPageState extends State<IntroductionPage> {
   bool isLoading = false;
   bool loginError = false;
-  String errorMessage;
+  late String errorMessage;
 
   Color activeColor = Colors.lightBlue;
-  Color inactiveColor = Colors.pink[700];
+  Color inactiveColor = Colors.pink[700]!;
   PaintingStyle activePaintingStyle = PaintingStyle.fill;
   PaintingStyle inactivePaintingStyle = PaintingStyle.stroke;
   PageController pageController = PageController();

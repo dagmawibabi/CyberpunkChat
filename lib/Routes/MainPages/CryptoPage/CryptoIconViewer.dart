@@ -13,7 +13,7 @@ class CryptoIconViewer extends StatefulWidget {
 class _CryptoIconViewerState extends State<CryptoIconViewer> {
   @override
   Widget build(BuildContext context) {
-    Map receivedData = ModalRoute.of(context).settings.arguments;
+    Object? receivedData = ModalRoute.of(context)?.settings.arguments;
     return Scaffold(
       backgroundColor: Colors.lightGreenAccent, //grey[900],
 
@@ -24,7 +24,7 @@ class _CryptoIconViewerState extends State<CryptoIconViewer> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.network(
-                receivedData["image"],
+                (receivedData as Map)["image"],
               ),
               SizedBox(height: 20.0),
               Text(

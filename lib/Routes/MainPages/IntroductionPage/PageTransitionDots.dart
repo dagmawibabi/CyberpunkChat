@@ -3,12 +3,12 @@ import 'package:socialmedia/Routes/UIElements/DentContainer.dart';
 
 class PageTransitionProgressDots extends StatelessWidget {
   const PageTransitionProgressDots({
-    Key key,
-    @required this.activeIndex,
-    @required this.activeColor,
-    @required this.activePaintingStyle,
-    @required this.inactiveColor,
-    @required this.inactivePaintingStyle,
+    Key? key,
+    required this.activeIndex,
+    required this.activeColor,
+    required this.activePaintingStyle,
+    required this.inactiveColor,
+    required this.inactivePaintingStyle,
   }) : super(key: key);
   final int activeIndex;
   final Color activeColor;

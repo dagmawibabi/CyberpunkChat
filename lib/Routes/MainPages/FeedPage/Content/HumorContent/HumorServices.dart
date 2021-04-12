@@ -53,8 +53,8 @@ class HumorServices {
 
     // Grab N-amount of trending memes from the subreddits
     for (var i = 0; i < subRedditsList.length; i++) {
-      Response responseSubReddit =
-          await get("https://www.reddit.com/r/" + subRedditsList[i] + ".json");
+      Response responseSubReddit = await get(
+          Uri.parse("https://www.reddit.com/r/" + subRedditsList[i] + ".json"));
       dynamic responseSubRedditJSON = jsonDecode(responseSubReddit.body);
 
       for (var j = 0;

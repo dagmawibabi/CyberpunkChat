@@ -201,9 +201,9 @@ class _CryptoPageState extends State<CryptoPage> {
 
 class CryptoDetailCard extends StatelessWidget {
   const CryptoDetailCard({
-    Key key,
-    @required this.title,
-    @required this.value,
+    Key? key,
+    required this.title,
+    required this.value,
   }) : super(key: key);
   final String title;
   final String value;
@@ -219,7 +219,7 @@ class CryptoDetailCard extends StatelessWidget {
               40.0,
               12.0,
               10.0,
-              Colors.grey[850],
+              Colors.grey[850]!,
               PaintingStyle.fill,
             ),
           ),

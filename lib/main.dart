@@ -29,7 +29,8 @@ class Main extends StatefulWidget {
 class _MainState extends State<Main> {
   Future<void> initializeDarkMode() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool darkMode = prefs.getBool("DarkModeValue");
+    bool darkMode = prefs.getBool("DarkModeValue")!;
+    // ignore: unnecessary_null_comparison
     if (darkMode == null) {
       darkMode = true;
       prefs.setBool("DarkModeValue", true);

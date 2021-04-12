@@ -13,7 +13,20 @@ import 'package:socialmedia/Routes/UIElements/DesignElements.dart';
 import 'package:socialmedia/Routes/UIElements/DentContainer.dart';
 
 void main() {
-  runApp(FeedPage());
+  late List newsArticlesListFP = [];
+  late bool isNewsTabLoadingFP = true;
+  late List quotesListFP = [];
+  late bool isQuotesTabLoadingFP = true;
+  late Function getQuotesRefreshFP = () => {};
+  runApp(
+    FeedPage(
+      newsArticlesListFP: newsArticlesListFP,
+      isNewsTabLoadingFP: isNewsTabLoadingFP,
+      quotesListFP: quotesListFP,
+      isQuotesTabLoadingFP: isQuotesTabLoadingFP,
+      getQuotesRefreshFP: getQuotesRefreshFP,
+    ),
+  );
 }
 
 class FeedPage extends StatefulWidget {
@@ -25,12 +38,12 @@ class FeedPage extends StatefulWidget {
   final bool isQuotesTabLoadingFP;
   final Function getQuotesRefreshFP;
   const FeedPage({
-    Key key,
-    this.newsArticlesListFP,
-    this.isNewsTabLoadingFP,
-    this.quotesListFP,
-    this.isQuotesTabLoadingFP,
-    this.getQuotesRefreshFP,
+    Key? key,
+    required this.newsArticlesListFP,
+    required this.isNewsTabLoadingFP,
+    required this.quotesListFP,
+    required this.isQuotesTabLoadingFP,
+    required this.getQuotesRefreshFP,
   }) : super(key: key);
 }
 
@@ -217,7 +230,7 @@ class _FeedPageState extends State<FeedPage> with TickerProviderStateMixin {
                 children: [
                   CustomPaint(
                     painter: DentContainer(46.0, 36.0, 10.0, 8.0,
-                        Colors.grey[400], PaintingStyle.fill),
+                        Colors.grey[400]!, PaintingStyle.fill),
                   ),
                   CustomPaint(
                     painter: DentContainer(46.0, 36.0, 10.0, 8.0, Colors.black,

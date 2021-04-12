@@ -24,6 +24,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late List newsArticlesListFP;
+  late bool isNewsTabLoadingFP;
+  late List quotesListFP;
+  late bool isQuotesTabLoadingFP;
+  late Function getQuotesRefreshFP;
+
   // TRIAL START
   bool isContentLoading = true;
 
@@ -74,21 +80,28 @@ class _HomeState extends State<Home> {
 
   // TRIAL END
 
+  int curPage = 0;
+
+  @override
+  void initState() {
+    newsArticlesListFP = [];
+    isNewsTabLoadingFP = true;
+    quotesListFP = [];
+    isQuotesTabLoadingFP = true;
+    getQuotesRefreshFP = () => {};
+    super.initState();
+    getNews();
+    getQuotes();
+  }
+
   List pages = [
-    FeedPage(),
+    "cats",
     SearchPage(),
     MusicPage(),
     CryptoPage(),
     SettingsPage(),
     ChatPage(),
   ];
-  int curPage = 0;
-  @override
-  void initState() {
-    super.initState();
-    getNews();
-    getQuotes();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +136,7 @@ class _HomeState extends State<Home> {
                         children: [
                           CustomPaint(
                             painter: DentContainer(46.0, 36.0, 10.0, 8.0,
-                                Colors.grey[400], PaintingStyle.fill),
+                                Colors.grey[400]!, PaintingStyle.fill),
                           ),
                           CustomPaint(
                             painter: DentContainer(46.0, 36.0, 10.0, 8.0,

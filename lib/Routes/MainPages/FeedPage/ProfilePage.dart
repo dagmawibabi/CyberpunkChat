@@ -20,7 +20,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final double dpWidth = 200.0;
   final double dpHeight = 200.0;
-  File _image;
+  late File _image;
   final picker = ImagePicker();
 
   Future getImage() async {
@@ -34,11 +34,11 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
-  User currentUser;
+  late User currentUser;
   void getUser() {
     final _auth = FirebaseAuth.instance;
     print(_auth.currentUser);
-    currentUser = _auth.currentUser;
+    currentUser = _auth.currentUser!;
   }
 
   @override

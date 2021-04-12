@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DesignElements {
-  static Color black;
-  static Color grey;
-  static Color yellow;
-  static bool darkModeValue;
+  static Color black = Colors.black;
+  static Color grey = Colors.grey;
+  static Color yellow = Colors.yellow;
+  static bool darkModeValue = true;
 
   Future<void> getDarkModeValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    darkModeValue = prefs.getBool("DarkModeValue");
+    darkModeValue = prefs.getBool("DarkModeValue")!;
     changeTheme();
   }
 
   void changeTheme() {
     if (darkModeValue == true) {
       black = Colors.black;
-      grey = Colors.grey[200];
+      grey = Colors.grey[200]!;
       yellow = Color.fromRGBO(248, 239, 5, 1);
     } else {
-      black = Colors.grey[200];
+      black = Colors.grey[200]!;
       grey = Colors.black;
       yellow = Color.fromRGBO(248, 239, 5, 1);
     }
@@ -29,7 +29,7 @@ class DesignElements {
   static String secondaryFont = "BlenderProBook";
   static String tirtiaryFont = "BlenderProBold";
 
-  static Color scaffoldBG = Colors.grey[700];
+  static Color scaffoldBG = Colors.grey[700]!;
   static Color scaffoldBodyText = black;
 
   static Color appBarBG = black;

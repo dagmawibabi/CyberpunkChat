@@ -49,7 +49,7 @@ class _ChatPageState extends State<ChatPage> {
                       62.0,
                       14.0,
                       10.0,
-                      Colors.grey[300],
+                      Colors.grey[300]!,
                       PaintingStyle.fill,
                     ),
                   ),

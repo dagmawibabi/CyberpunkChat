@@ -4,9 +4,9 @@ import 'package:socialmedia/Routes/UIElements/TextContentDisplayer.dart';
 
 class WholesomeTab extends StatelessWidget {
   const WholesomeTab({
-    Key key,
-    @required this.contentList,
-    @required this.getRefresh,
+    Key? key,
+    required this.contentList,
+    required this.getRefresh,
   }) : super(key: key);
 
   final List contentList;

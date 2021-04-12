@@ -3,13 +3,13 @@ import 'package:socialmedia/Routes/MainPages/FeedPage/Content/NewsContent/NewsCa
 
 class NewsTab extends StatelessWidget {
   const NewsTab({
-    Key key,
-    @required this.newsArticlesList,
-    @required this.getNewsRefresh,
+    Key? key,
+    required this.newsArticlesList,
+    required this.getNewsRefresh,
   }) : super(key: key);
-  final Function getNewsRefresh;
 
   final List newsArticlesList;
+  final Function getNewsRefresh;
 
   @override
   Widget build(BuildContext context) {

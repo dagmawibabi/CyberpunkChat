@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController passwordController = TextEditingController();
   bool isLoading = false;
   bool loginError = false;
-  String errorMessage;
+  late String errorMessage;
 
   void initialize() async {
     await Firebase.initializeApp();

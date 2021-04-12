@@ -4,13 +4,13 @@ import 'package:socialmedia/Routes/UIElements/DesignElements.dart';
 
 class NewsCard extends StatelessWidget {
   const NewsCard({
-    Key key,
-    @required this.newsImage,
-    @required this.newsHeadline,
-    @required this.newsDescription,
-    @required this.newsCategory,
-    @required this.newsSource,
-    @required this.newsDate,
+    Key? key,
+    required this.newsImage,
+    required this.newsHeadline,
+    required this.newsDescription,
+    required this.newsCategory,
+    required this.newsSource,
+    required this.newsDate,
   }) : super(key: key);
 
   final String newsImage;
@@ -31,7 +31,7 @@ class NewsCard extends StatelessWidget {
         children: [
           CustomPaint(
             painter: DentContainer(newsCardWidth, newsCardHeight, 20.0, 14.0,
-                Colors.grey[300], PaintingStyle.fill),
+                Colors.grey[300]!, PaintingStyle.fill),
           ),
           CustomPaint(
             painter: DentContainer(newsCardWidth, newsCardHeight, 20.0, 14.0,
@@ -71,6 +71,7 @@ class NewsCard extends StatelessWidget {
                 ),
                 Divider(color: Colors.black, thickness: 1.0),
                 // Image
+                // ignore: unnecessary_null_comparison
                 newsImage != null
                     ? Stack(
                         children: [
@@ -128,7 +129,7 @@ class NewsCard extends StatelessWidget {
                   children: [
                     CustomPaint(
                       painter: DentContainer(366.0, 36.0, 10.0, 10.0,
-                          Colors.grey[200], PaintingStyle.fill),
+                          Colors.grey[200]!, PaintingStyle.fill),
                     ),
                     CustomPaint(
                       painter: DentContainer(366.0, 36.0, 10.0, 10.0,
@@ -141,6 +142,7 @@ class NewsCard extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
+                              // ignore: unnecessary_null_comparison
                               newsHeadline != null
                                   ? newsHeadline.toUpperCase()
                                   : "",
@@ -162,7 +164,7 @@ class NewsCard extends StatelessWidget {
                   children: [
                     CustomPaint(
                       painter: DentContainer(366.0, 84.0, 10.0, 10.0,
-                          Colors.grey[300], PaintingStyle.fill),
+                          Colors.grey[300]!, PaintingStyle.fill),
                     ),
                     CustomPaint(
                       painter: DentContainer(366.0, 84.0, 10.0, 10.0,
@@ -175,6 +177,7 @@ class NewsCard extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
+                              // ignore: unnecessary_null_comparison
                               newsDescription != null
                                   ? newsDescription.toUpperCase() + "\n\n\n"
                                   : "The description of this new article is currently unavailable. We will update as soon as it's available! Thank you!"

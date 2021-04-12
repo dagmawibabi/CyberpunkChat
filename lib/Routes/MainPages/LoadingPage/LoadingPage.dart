@@ -28,9 +28,9 @@ class _LoadingPageState extends State<LoadingPage> {
 
   void isLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool isIn = prefs.getBool("isLoggedIn");
-    String email = prefs.getString("email");
-    String password = prefs.getString("password");
+    bool isIn = prefs.getBool("isLoggedIn")!;
+    String email = prefs.getString("email")!;
+    String password = prefs.getString("password")!;
     if (isIn) {
       AuthMethods auth = AuthMethods();
       auth.signIn(email, password).then((value) => print(value));

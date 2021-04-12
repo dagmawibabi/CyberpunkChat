@@ -4,16 +4,16 @@ import 'package:socialmedia/Routes/UIElements/DesignElements.dart';
 
 class TextOnlyContent extends StatelessWidget {
   const TextOnlyContent({
-    Key key,
-    @required this.source,
-    @required this.contentTag,
-    @required this.author,
-    @required this.ups,
-    @required this.content,
-    @required this.title,
-    @required this.isFlagged,
-    @required this.isNSFW,
-    @required this.isSpoiler,
+    Key? key,
+    required this.source,
+    required this.contentTag,
+    required this.author,
+    required this.ups,
+    required this.content,
+    required this.title,
+    required this.isFlagged,
+    required this.isNSFW,
+    required this.isSpoiler,
   }) : super(key: key);
 
   final int ups;
@@ -36,7 +36,7 @@ class TextOnlyContent extends StatelessWidget {
       child: Stack(
         children: [
           CustomPaint(
-            painter: DentContainer(width, height, 20.0, 14.0, Colors.grey[300],
+            painter: DentContainer(width, height, 20.0, 14.0, Colors.grey[300]!,
                 PaintingStyle.fill),
           ),
           CustomPaint(

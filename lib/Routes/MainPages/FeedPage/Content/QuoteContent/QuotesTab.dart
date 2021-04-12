@@ -3,9 +3,9 @@ import 'package:socialmedia/Routes/UIElements/QuoteContentDisplayer.dart';
 
 class QuotesTab extends StatefulWidget {
   const QuotesTab({
-    Key key,
-    @required this.quotesList,
-    @required this.getQuotesRefresh,
+    Key? key,
+    required this.quotesList,
+    required this.getQuotesRefresh,
   }) : super(key: key);
 
   final List quotesList;
@@ -29,7 +29,7 @@ class _QuotesTabState extends State<QuotesTab> {
       child: ListView.builder(
         itemCount: widget.quotesList.length,
         itemBuilder: (context, index) {
-          Widget qc;
+          Widget? qc;
           if (widget.quotesList[index][0] == "QUOTABLE") {
             qc = QuoteContent(
               quoteSource: "QUOTABLE",
@@ -61,7 +61,7 @@ class _QuotesTabState extends State<QuotesTab> {
           }
           return Column(
             children: [
-              qc,
+              qc!,
               index == widget.quotesList.length - 1
                   ? Column(
                       children: [

@@ -13,7 +13,7 @@ class GraphicsViewer extends StatefulWidget {
 }
 
 class _GraphicsViewerState extends State<GraphicsViewer> {
-  int downloadProgress;
+  late int downloadProgress;
   bool enableRotation = false;
   String downloadingStatus = "";
   IconData downloadStatus = Icons.file_download;
@@ -35,8 +35,9 @@ class _GraphicsViewerState extends State<GraphicsViewer> {
 
   @override
   Widget build(BuildContext context) {
-    Map receivedData = ModalRoute.of(context).settings.arguments;
-    String assetOrNetwork = receivedData["assetOrNetwork"];
+    Object? receivedData = ModalRoute.of(context)?.settings.arguments;
+    String assetOrNetwork =
+        receivedData != null ? (receivedData as Map)["assetOrNetwork"] : null;
     return Scaffold(
       backgroundColor: Colors.grey[850],
       appBar: AppBar(
@@ -68,8 +69,9 @@ class _GraphicsViewerState extends State<GraphicsViewer> {
               );
             },
             imageProvider: assetOrNetwork == "network"
-                ? NetworkImage(receivedData["graphics"])
-                : AssetImage(receivedData["graphics"]),
+                ? NetworkImage((receivedData as Map)["graphics"])
+                : AssetImage((receivedData as Map)["graphics"])
+                    as ImageProvider,
             enableRotation: enableRotation,
           ),
         ),
@@ -86,9 +88,6 @@ class _GraphicsViewerState extends State<GraphicsViewer> {
                   // Saved with this method.
                   var imageId = await ImageDownloader.downloadImage(
                       receivedData["graphics"]);
-                  if (imageId == null) {
-                    return;
-                  }
 
                   // Below is a method of obtaining saved image information.
                   var fileName = await ImageDownloader.findName(imageId);

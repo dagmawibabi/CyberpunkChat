@@ -4,13 +4,13 @@ import 'package:socialmedia/Routes/UIElements/DesignElements.dart';
 
 class CryptoCards extends StatelessWidget {
   const CryptoCards({
-    Key key,
-    @required this.cryptoImage,
-    @required this.cryptoIconColor,
-    @required this.cryptoName,
-    @required this.cryptoAbrv,
-    @required this.cryptoPrice,
-    @required this.cryptoMarketRate,
+    Key? key,
+    required this.cryptoImage,
+    required this.cryptoIconColor,
+    required this.cryptoName,
+    required this.cryptoAbrv,
+    required this.cryptoPrice,
+    required this.cryptoMarketRate,
   }) : super(key: key);
 
   final String cryptoImage;
@@ -32,7 +32,7 @@ class CryptoCards extends StatelessWidget {
               70.0,
               12.0,
               10.0,
-              Colors.grey[300],
+              Colors.grey[300]!,
               PaintingStyle.fill,
             ),
           ),

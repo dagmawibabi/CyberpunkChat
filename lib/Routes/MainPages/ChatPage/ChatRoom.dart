@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:socialmedia/Routes/UIElements/DentContainer.dart';
 import 'package:socialmedia/Routes/UIElements/DesignElements.dart';
 
-bool isMe;
+bool isMe = false;
 
 void main() {
   runApp(ChatRoom());
@@ -16,7 +16,7 @@ class ChatRoom extends StatefulWidget {
 }
 
 class _ChatRoomState extends State<ChatRoom> {
-  String messageText;
+  String messageText = "";
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   void messagesStream() async {
@@ -76,7 +76,7 @@ class _ChatRoomState extends State<ChatRoom> {
 
   @override
   Widget build(BuildContext context) {
-    Map receivedData = ModalRoute.of(context).settings.arguments;
+    dynamic receivedData = ModalRoute.of(context)?.settings.arguments;
     TextEditingController messageController = TextEditingController();
     bool isMe;
 
@@ -207,9 +207,9 @@ class _ChatRoomState extends State<ChatRoom> {
                               setState(() {});
                             }
                             if (snapshot.hasData) {
-                              final messages = snapshot.data.docs.reversed;
+                              final messages = snapshot.data?.docs.reversed;
                               List<Widget> messageWidgets = [];
-                              for (var message in messages) {
+                              for (var message in messages!) {
                                 final messageText = message["text"];
                                 final messageSender = message["sender"] != null
                                     ? message["sender"]
@@ -219,7 +219,7 @@ class _ChatRoomState extends State<ChatRoom> {
                                     ? usersInGroup.add(messageSender)
                                     : print(usersInGroup.length);
                                 final messageTime = message["time"];
-                                if (messageSender == _auth.currentUser.email) {
+                                if (messageSender == _auth.currentUser?.email) {
                                   isMe = true;
                                 } else {
                                   isMe = false;
@@ -317,7 +317,7 @@ class _ChatRoomState extends State<ChatRoom> {
                                   _firestore.collection("messages").add(
                                     {
                                       "text": messageText,
-                                      "sender": _auth.currentUser.email,
+                                      "sender": _auth.currentUser?.email,
                                       "time": FieldValue.serverTimestamp(),
                                     },
                                   );
@@ -348,11 +348,11 @@ class MessageContainer extends StatefulWidget {
   @override
   _MessageContainerState createState() => _MessageContainerState();
   MessageContainer({
-    this.isMe,
-    this.messageSenderColor,
-    this.messageSender,
-    this.messageText,
-    this.messageTime,
+    required this.isMe,
+    required this.messageSenderColor,
+    required this.messageSender,
+    required this.messageText,
+    required this.messageTime,
   });
   final bool isMe;
   final Color messageSenderColor;
@@ -362,7 +362,7 @@ class MessageContainer extends StatefulWidget {
 }
 
 class _MessageContainerState extends State<MessageContainer> {
-  double containerWidth;
+  late double containerWidth;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -380,10 +380,10 @@ class _MessageContainerState extends State<MessageContainer> {
           decoration: BoxDecoration(
             color: widget.isMe
                 ? Colors.black87
-                : Colors.grey[300].withOpacity(0.9),
+                : Colors.grey[300]?.withOpacity(0.9),
             //border: Border.all(color: widget.messageSenderColor, width: 1.6),
             border: Border.all(
-                color: widget.isMe ? Colors.grey[300] : Colors.black,
+                color: (widget.isMe ? Colors.grey[300] : Colors.black)!,
                 width: 1.4),
             borderRadius: BorderRadius.only(
               topLeft:

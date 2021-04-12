@@ -4,11 +4,11 @@ import 'package:socialmedia/Routes/UIElements/DesignElements.dart';
 
 class QuoteContent extends StatelessWidget {
   const QuoteContent({
-    Key key,
-    @required this.quoteSource,
-    @required this.quoteTag,
-    @required this.quoteContent,
-    @required this.quoteAuthor,
+    Key? key,
+    required this.quoteSource,
+    required this.quoteTag,
+    required this.quoteContent,
+    required this.quoteAuthor,
   }) : super(key: key);
 
   final String quoteSource;
@@ -25,7 +25,7 @@ class QuoteContent extends StatelessWidget {
       child: Stack(
         children: [
           CustomPaint(
-            painter: DentContainer(width, height, 10.0, 10.0, Colors.grey[300],
+            painter: DentContainer(width, height, 10.0, 10.0, Colors.grey[300]!,
                 PaintingStyle.fill),
           ),
           CustomPaint(

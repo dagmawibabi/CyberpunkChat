@@ -13,13 +13,13 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool darkMode;
+  late bool darkMode;
   bool darkModePrivate = true;
 
   Future<void> getDarkModeValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     try {
-      darkMode = prefs.getBool("DarkModeValue");
+      darkMode = prefs.getBool("DarkModeValue")!;
       darkModePrivate = darkMode;
     } catch (e) {
       darkMode = true;
